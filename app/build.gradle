@@ -15,6 +15,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        if (rootProject.file("maps.properties").exists()) {
+            properties.load(rootProject.file("maps.properties").newDataInputStream())
+        }
+
+        manifestPlaceholders.mapsApiKey = properties.getProperty("MAPS_API_KEY", "")
     }
 
     buildTypes {
@@ -52,6 +59,9 @@ dependencies {
     def swipe_refresh_layout = "1.1.0"
     def bump_version = "4.12.0"
     def coroutines_version = "1.4.3"
+    def maps_version = "17.0.1"
+    def location_version = "18.0.0"
+    def maps_ktx_version = "3.0.1"
 
 //  base
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -76,6 +86,12 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+//  google maps
+    implementation "com.google.android.gms:play-services-location:$location_version"
+    implementation "com.google.android.gms:play-services-maps:$maps_version"
+    implementation "com.google.maps.android:maps-ktx:$maps_ktx_version"
+    implementation "com.google.maps.android:maps-utils-ktx:$maps_ktx_version"
 
 //  tests
     testImplementation "junit:junit:$junit_version"
