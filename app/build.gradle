@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 30
@@ -36,6 +37,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
     buildFeatures {
         viewBinding true
@@ -62,6 +64,7 @@ dependencies {
     def maps_version = "17.0.1"
     def location_version = "18.0.0"
     def maps_ktx_version = "3.0.1"
+    def hilt_work_version = "1.0.0"
 
 //  base
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -81,6 +84,11 @@ dependencies {
 //  glide
     implementation "com.github.bumptech.glide:glide:$bump_version"
     kapt "com.github.bumptech.glide:compiler:$bump_version"
+
+//  hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation "androidx.hilt:hilt-work:$hilt_work_version"
 
 //  room
     implementation "androidx.room:room-runtime:$room_version"
