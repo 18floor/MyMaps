@@ -1,4 +1,4 @@
-package ru.netology.mymap.dto
+package ru.netology.mymap.data
 
 data class Place(
     val idPlace: Int,

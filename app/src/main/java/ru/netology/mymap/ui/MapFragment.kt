@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -25,12 +26,14 @@ import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.utils.collection.addMarker
 import ru.netology.mymap.R
 import ru.netology.mymap.databinding.FragmentMapBinding
-import ru.netology.mymap.viewmodel.PlacesViewModel
+import ru.netology.mymap.viewmodel.PlaceViewModel
 import ru.netology.mymap.utils.icon
 
 class MapFragment : Fragment() {
 
-    private lateinit var placesViewModel: PlacesViewModel
+    private val placeViewModel: PlaceViewModel by viewModels(
+        ownerProducer = ::requireParentFragment
+    )
 
     private lateinit var googleMap: GoogleMap
 
