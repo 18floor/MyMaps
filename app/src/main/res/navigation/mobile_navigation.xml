@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_map">
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="ru.netology.mymap.ui.MapFragment"
+        android:label="@string/my_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_navigation_map_to_navigation_places"
+            app:destination="@id/navigation_places" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_places"
+        android:name="ru.netology.mymap.ui.PlacesFragment"
+        android:label="@string/my_places"
+        tools:layout="@layout/fragment_places" >
+        <action
+            android:id="@+id/action_navigation_places_to_navigation_map"
+            app:destination="@id/navigation_map" />
+    </fragment>
+
+</navigation>

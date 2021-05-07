@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8542F3</color>
+    <color name="colorPrimaryDark">#5D00F5</color>
+    <color name="colorAccent">#0066FF</color>
+    <color name="netologyRed">#EB236B</color>
+    <color name="netologyBlue">#0066FF</color>
+    <color name="netologyPurple">#5D00F5</color>
+    <color name="netologyGreen">#4BD0A0</color>
+    <color name="netologyGreenTranslucent">#604BD0A0</color>
+    <color name="defaultGray">#89000000</color>
+    <color name="lightGray">#89CDCDCD</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="white_overlay">#FFFFFF</color>
+</resources>

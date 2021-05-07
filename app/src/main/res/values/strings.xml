@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Мои Карты</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="my_map">Мои карты</string>
+    <string name="my_places">Мои метки</string>
+</resources>
