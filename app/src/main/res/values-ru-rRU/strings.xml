@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мои Карты</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="my_map">Мои карты</string>
+    <string name="my_places">Мои метки</string>
+    <string name="place_description">Описание метки</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="place_title">Название метки</string>
+    <string name="place_dialog_title">Добавить метку</string>
+    <string name="icon">Icon</string>
+    <string name="gps_not_allowed">Вы не давали разрешения на использвоание геопозиции!</string>
+</resources>

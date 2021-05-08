@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">Мои Карты</string>
+    <string name="app_name">My Maps</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="my_map">Мои карты</string>
-    <string name="my_places">Мои метки</string>
+    <string name="my_map">My Maps</string>
+    <string name="my_places">My Places</string>
+    <string name="place_description">Place Description</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="place_title">Place Title</string>
+    <string name="place_dialog_title">Add Place</string>
+    <string name="icon">Icon</string>
+    <string name="gps_not_allowed">You have not given permission to use the location</string>
 </resources>

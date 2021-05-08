@@ -9,16 +9,16 @@ data class PlaceEntity(
     val idPlace: Int,
     val titlePlace: String,
     val descriptionPlace: String?,
-    val lon: Float,
-    val lat: Float,
+    val lat: Double,
+    val lon: Double,
 ) {
     fun toDto(): Place {
         return Place(
             idPlace,
             titlePlace,
             descriptionPlace,
-            lon,
             lat,
+            lon,
         )
     }
 
@@ -28,8 +28,8 @@ data class PlaceEntity(
                 dto.idPlace,
                 dto.titlePlace,
                 dto.descriptionPlace,
-                dto.lon,
                 dto.lat,
+                dto.lon,
             )
     }
 }

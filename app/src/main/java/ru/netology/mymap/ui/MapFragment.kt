@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
@@ -18,16 +18,16 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.collections.MarkerManager
-import com.google.maps.android.ktx.awaitAnimateCamera
 import com.google.maps.android.ktx.awaitMap
-import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.utils.collection.addMarker
 import ru.netology.mymap.R
 import ru.netology.mymap.databinding.FragmentMapBinding
 import ru.netology.mymap.viewmodel.PlaceViewModel
-import ru.netology.mymap.utils.icon
 
 class MapFragment : Fragment() {
 
@@ -46,7 +46,11 @@ class MapFragment : Fragment() {
                     uiSettings.isMyLocationButtonEnabled = true
                 }
             } else {
-                // TODO: show sorry dialog
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.gps_not_allowed),
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
 
@@ -77,7 +81,6 @@ class MapFragment : Fragment() {
             }
 
             when {
-                // 1. Проверяем есть ли уже права
                 ContextCompat.checkSelfPermission(
                     requireContext(),
                     Manifest.permission.ACCESS_FINE_LOCATION
@@ -94,49 +97,52 @@ class MapFragment : Fragment() {
                         println(it)
                     }
                 }
-                // 2. Должны показать обоснование необходимости прав
                 shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                    // TODO: show rationale dialog
+                    Snackbar.make(
+                        binding.root,
+                        "Тут текст - обоснование",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
-                // 3. Запрашиваем права
                 else -> {
                     requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                 }
             }
 
-            val target = LatLng(55.751999, 37.617734)
-            val markerManager = MarkerManager(googleMap)
-            val collection: MarkerManager.Collection = markerManager.newCollection().apply {
-                addMarker {
-                    position(target)
-                    icon(
-                        AppCompatResources.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_place_64
-                        )!!)
-                    title("The Moscow Kremlin")
-                }.apply {
-                    tag = "Any additional data" // Any
-                }
-            }
-            collection.setOnMarkerClickListener { marker ->
-                // TODO: work with marker
-                Toast.makeText(
-                    requireContext(),
-                    (marker.tag as String),
-                    Toast.LENGTH_LONG
-                ).show()
-                true
-            }
+            placeViewModel.data.observe(viewLifecycleOwner, { state ->
 
-            googleMap.awaitAnimateCamera(
-                CameraUpdateFactory.newCameraPosition(
-                    cameraPosition {
-                        target(target)
-                        zoom(15F)
+                val markerManager = MarkerManager(googleMap)
+                val collection: MarkerManager.Collection = markerManager.newCollection().apply {
+                    state.places.forEach { place ->
+                        addMarker {
+                            position(LatLng(place.lat, place.lon))
+                            icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                            title(place.titlePlace)
+                            snippet(place.descriptionPlace)
+                            infoWindowAnchor(0.5F, 0F)
+                        }
                     }
-                ))
+                }
+
+                collection.setOnMarkerClickListener { marker ->
+                    marker.showInfoWindow()
+                    true
+                }
+
+                val boundsBuilder = LatLngBounds.Builder()
+                state.places.forEach { place ->
+                    boundsBuilder.include(LatLng(place.lat, place.lon))
+                }
+                val bounds = boundsBuilder.build()
+
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
+
+            })
+
+            googleMap.setOnMapLongClickListener { point ->
+                EditPlaceDialog(point.latitude, point.longitude, 0)
+                    .show(childFragmentManager, EditPlaceDialog.TAG)
+            }
         }
     }
-
 }

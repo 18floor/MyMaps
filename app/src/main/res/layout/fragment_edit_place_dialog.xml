@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/common_spacing"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/dialogIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_place_48"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/icon" />
+    
+    <TextView
+        android:id="@+id/titleDialogView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/place_dialog_title"
+        android:textColor="@color/light_blue_600"
+        android:textSize="@dimen/big_title_text"
+        app:layout_constraintStart_toEndOf="@id/dialogIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dialogIcon"
+        app:layout_constraintBottom_toBottomOf="@id/dialogIcon"/>
+
+    <EditText
+        android:id="@+id/placeTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="Название метки"
+        android:hint="@string/place_title"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toStartOf="@id/clearButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialogIcon"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/clearButton"
+        style="@style/Theme.MyMap.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_clear_24"
+        app:layout_constraintBottom_toBottomOf="@id/placeTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/placeTitle"
+        app:layout_constraintTop_toTopOf="@id/placeTitle" />
+
+    <EditText
+        android:id="@+id/placeDescription"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_field_height"
+        android:gravity="start|top"
+        android:paddingStart="@dimen/min_spacing"
+        android:paddingEnd="@dimen/min_spacing"
+        android:hint="@string/place_description"
+        android:background="@android:color/transparent"
+        android:inputType="textMultiLine"
+        android:maxLines="10"
+        app:layout_constraintTop_toBottomOf="@id/placeTitle"
+        android:autofillHints="Описание метки" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:width="@dimen/standard_button_width"
+        android:text="@string/save"
+        android:textSize="@dimen/small_text"
+        app:layout_constraintEnd_toStartOf="@id/btnCancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeDescription" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:width="@dimen/standard_button_width"
+        android:text="@string/cancel"
+        android:textSize="@dimen/small_text"
+        android:backgroundTint="@color/netologyRed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnSubmit"
+        app:layout_constraintTop_toBottomOf="@id/placeDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
