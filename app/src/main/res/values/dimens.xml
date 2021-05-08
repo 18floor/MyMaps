@@ -12,7 +12,7 @@
 
     <!--  text  -->
     <dimen name="big_title_text">20sp</dimen>
-    <dimen name="app_title_text">18sp</dimen>
-    <dimen name="title_text">16sp</dimen>
+    <dimen name="title_text">18sp</dimen>
+    <dimen name="regular_text">16sp</dimen>
     <dimen name="small_text">12sp</dimen>
 </resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/placeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/common_spacing"
+        tools:context=".ui.PlacesFragment">
+
+        <ImageView
+            android:id="@+id/dialogIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/ic_place_48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/placeTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/place_dialog_title"
+            android:textColor="@color/light_blue_600"
+            android:textSize="@dimen/big_title_text"
+            app:layout_constraintBottom_toTopOf="@id/placeDescription"
+            app:layout_constraintEnd_toStartOf="@id/clearButton"
+            app:layout_constraintStart_toEndOf="@id/dialogIcon"
+            app:layout_constraintTop_toTopOf="@id/dialogIcon"
+            tools:text="Название метки" />
+
+        <TextView
+            android:id="@+id/placeDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="@dimen/regular_text"
+            app:layout_constraintEnd_toStartOf="@id/clearButton"
+            app:layout_constraintStart_toEndOf="@id/dialogIcon"
+            app:layout_constraintTop_toBottomOf="@id/placeTitle"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Подробное описание метки" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clearButton"
+            style="@style/Theme.MyMap.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_clear_24"
+            app:layout_constraintBottom_toBottomOf="@id/placeDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/placeTitle"
+            app:layout_constraintTop_toTopOf="@id/placeTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
