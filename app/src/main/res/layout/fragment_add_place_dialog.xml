@@ -13,12 +13,12 @@
         android:src="@drawable/ic_place_48"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/icon" />
-    
+
     <TextView
         android:id="@+id/titleDialogView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/edit_dialog_title"
+        android:text="@string/add_dialog_title"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/big_title_text"
         app:layout_constraintStart_toEndOf="@id/dialogIcon"
@@ -43,7 +43,7 @@
         style="@style/Theme.MyMap.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/regular_text"
+
         app:icon="@drawable/ic_clear_24"
         app:layout_constraintBottom_toBottomOf="@id/placeTitle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +61,7 @@
         android:background="@android:color/transparent"
         android:inputType="textMultiLine"
         android:maxLines="10"
+        android:textSize="@dimen/regular_text"
         app:layout_constraintTop_toBottomOf="@id/placeTitle"
         android:autofillHints="Описание метки" />
 

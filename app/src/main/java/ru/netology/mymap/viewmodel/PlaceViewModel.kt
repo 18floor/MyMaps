@@ -15,19 +15,34 @@ class PlaceViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PlaceRepository =
         PlaceRepositoryIml(AppDb.getInstance(context = application).placeDao())
 
-
     val data: LiveData<PlaceModel> = repository.data.map(::PlaceModel)
     private val edited = MutableLiveData(Empty.emptyPlace)
+
+    private val _dataState = MutableLiveData<PlaceModel>()
+    val dataState: LiveData<PlaceModel>
+        get() = _dataState
 
     fun savePlace() {
         edited.value?.let {
             viewModelScope.launch {
                 try {
+                    _dataState.value = PlaceModel(loading = true)
                     repository.savePlace(it)
+                    _dataState.value = PlaceModel()
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    _dataState.value = PlaceModel(error = true)
                 }
             }
+        }
+        edited.value = Empty.emptyPlace
+    }
+
+    fun deletePlace(idPlace: Int) = viewModelScope.launch {
+        try {
+            repository.deletePlace(idPlace)
+            _dataState.value = PlaceModel()
+        } catch (e: Exception) {
+            _dataState.value = PlaceModel(error = true)
         }
     }
 
@@ -36,6 +51,7 @@ class PlaceViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun changeContent(
+        idPlace: Int,
         titlePlace: String,
         descriptionPlace: String?,
         lat: Double,
@@ -47,11 +63,11 @@ class PlaceViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value =
             edited.value?.copy(
+                idPlace = idPlace,
                 titlePlace = title,
                 descriptionPlace = descriptionPlace,
                 lat = lat,
                 lon = lon,
             )
     }
-
 }

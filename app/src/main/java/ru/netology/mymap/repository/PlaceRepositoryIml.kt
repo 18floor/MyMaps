@@ -29,7 +29,7 @@ class PlaceRepositoryIml(private val dao: PlaceDao) : PlaceRepository {
 
     override suspend fun savePlace(place: Place) {
         try {
-            dao.insertPlace(PlaceEntity.fromDto(place))
+            dao.savePlace(PlaceEntity.fromDto(place))
         } catch (e: Exception) {
             throw UnknownError
         }

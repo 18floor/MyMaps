@@ -9,7 +9,11 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="place_title">Place Title</string>
-    <string name="place_dialog_title">Add Place</string>
+    <string name="edit_dialog_title">Edit Place</string>
     <string name="icon">Icon</string>
     <string name="gps_not_allowed">You have not given permission to use the location</string>
+    <string name="add_dialog_title">Add Place</string>
+    <string name="empty_title_warning">We need to write something in the title!</string>
+    <string name="warning">Warning!</string>
+    <string name="empty_map_dialog">Press and hold your finger on the map to set the mark</string>
 </resources>

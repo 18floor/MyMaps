@@ -9,15 +9,17 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.mymap.R
-import ru.netology.mymap.data.Place
-import ru.netology.mymap.databinding.FragmentEditPlaceDialogBinding
+import ru.netology.mymap.databinding.FragmentAddPlaceDialogBinding
 import ru.netology.mymap.utils.AndroidUtils
 import ru.netology.mymap.viewmodel.PlaceViewModel
 
-class EditPlaceDialog(val place: Place) : DialogFragment() {
+class AddPlaceDialog(
+    private val lat: Double,
+    private val lon: Double,
+) : DialogFragment() {
 
     companion object {
-        const val TAG = "EditPlaceDialog"
+        const val TAG = "AddPlaceDialog"
     }
 
     private val placeViewModel: PlaceViewModel by viewModels(
@@ -37,17 +39,11 @@ class EditPlaceDialog(val place: Place) : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val binding = FragmentEditPlaceDialogBinding.inflate(
+        val binding = FragmentAddPlaceDialogBinding.inflate(
             inflater,
             container,
             false
         )
-
-        binding.placeTitle.setText(place.titlePlace)
-        binding.placeDescription.setText(place.descriptionPlace)
-        val lat = place.lat
-        val lon = place.lon
-        val idPlace = place.idPlace
 
         binding.clearButton.setOnClickListener {
             binding.apply {
@@ -58,10 +54,9 @@ class EditPlaceDialog(val place: Place) : DialogFragment() {
 
         binding.btnSubmit.setOnClickListener {
             if (binding.placeTitle.text.isNotEmpty()) {
-
                 placeViewModel.run {
                     changeContent(
-                        idPlace,
+                        0,
                         binding.placeTitle.text.toString(),
                         binding.placeDescription.text.toString(),
                         lat,

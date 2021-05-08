@@ -25,9 +25,9 @@
             android:id="@+id/placeTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/place_dialog_title"
-            android:textColor="@color/light_blue_600"
-            android:textSize="@dimen/big_title_text"
+            android:text="@string/edit_dialog_title"
+            android:textColor="@color/netologyPurple"
+            android:textSize="@dimen/title_text"
             app:layout_constraintBottom_toTopOf="@id/placeDescription"
             app:layout_constraintEnd_toStartOf="@id/deleteButton"
             app:layout_constraintStart_toEndOf="@id/placeIcon"
@@ -59,4 +59,14 @@
             app:layout_constraintTop_toTopOf="@id/placeTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@id/deleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </com.google.android.material.card.MaterialCardView>

@@ -6,5 +6,6 @@ data class PlaceModel(
     val places: List<Place> = emptyList(),
     val empty: Boolean = false,
     val loading: Boolean = false,
+    val refreshing: Boolean = false,
     val error: Boolean = false,
 )

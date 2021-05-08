@@ -2,15 +2,14 @@ package ru.netology.mymap.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
@@ -37,6 +36,8 @@ class MapFragment : Fragment() {
 
     private lateinit var googleMap: GoogleMap
 
+    private val binding by lazy { FragmentMapBinding.inflate(layoutInflater) }
+
     @SuppressLint("MissingPermission")
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -53,8 +54,6 @@ class MapFragment : Fragment() {
                 ).show()
             }
         }
-
-    private val binding by lazy { FragmentMapBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -111,6 +110,16 @@ class MapFragment : Fragment() {
 
             placeViewModel.data.observe(viewLifecycleOwner, { state ->
 
+                if (state.places.isEmpty()) {
+                    AlertDialog.Builder(context)
+                        .setTitle(getString(R.string.warning))
+                        .setIcon(R.drawable.ic_alert_24)
+                        .setMessage(getString(R.string.empty_map_dialog))
+                        .setPositiveButton("Понятно") { _, _ -> }
+                        .create()
+                        .show()
+                }
+
                 val markerManager = MarkerManager(googleMap)
                 val collection: MarkerManager.Collection = markerManager.newCollection().apply {
                     state.places.forEach { place ->
@@ -130,18 +139,18 @@ class MapFragment : Fragment() {
                 }
 
                 val boundsBuilder = LatLngBounds.Builder()
-                state.places.forEach { place ->
-                    boundsBuilder.include(LatLng(place.lat, place.lon))
+                if (state.places.isNotEmpty()) {
+                    state.places.forEach { place ->
+                        boundsBuilder.include(LatLng(place.lat, place.lon))
+                    }
+                    val bounds = boundsBuilder.build()
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
                 }
-                val bounds = boundsBuilder.build()
-
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
-
             })
 
             googleMap.setOnMapLongClickListener { point ->
-                EditPlaceDialog(point.latitude, point.longitude, 0)
-                    .show(childFragmentManager, EditPlaceDialog.TAG)
+                AddPlaceDialog(point.latitude, point.longitude)
+                    .show(childFragmentManager, AddPlaceDialog.TAG)
             }
         }
     }
