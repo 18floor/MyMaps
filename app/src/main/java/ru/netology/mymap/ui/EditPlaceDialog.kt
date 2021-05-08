@@ -20,6 +20,10 @@ class EditPlaceDialog(val place: Place) : DialogFragment() {
         const val TAG = "EditPlaceDialog"
     }
 
+    private val idPlace = place.idPlace
+    private val lat = place.lat
+    private val lon = place.lon
+
     private val placeViewModel: PlaceViewModel by viewModels(
         ownerProducer = ::requireParentFragment
     )
@@ -45,9 +49,6 @@ class EditPlaceDialog(val place: Place) : DialogFragment() {
 
         binding.placeTitle.setText(place.titlePlace)
         binding.placeDescription.setText(place.descriptionPlace)
-        val lat = place.lat
-        val lon = place.lon
-        val idPlace = place.idPlace
 
         binding.clearButton.setOnClickListener {
             binding.apply {

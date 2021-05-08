@@ -14,7 +14,7 @@
     <string name="icon">Icon</string>
     <string name="gps_not_allowed">Вы не давали разрешения на использвоание геопозиции!</string>
     <string name="add_dialog_title">Добавить метку</string>
-    <string name="empty_title_warning">Надо что-то написать в заголовке!</string>
+    <string name="empty_title_warning">Надо что-то написать в названии!</string>
     <string name="warning">Внимание!</string>
     <string name="empty_map_dialog">Для установки метки нажмите и удерживайте палец на карте</string>
 </resources>

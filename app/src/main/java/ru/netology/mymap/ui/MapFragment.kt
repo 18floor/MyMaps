@@ -70,7 +70,7 @@ class MapFragment : Fragment() {
 
         lifecycle.coroutineScope.launchWhenCreated {
             googleMap = mapFragment.awaitMap().apply {
-                isTrafficEnabled = true
+                isTrafficEnabled = false
                 isBuildingsEnabled = true
 
                 uiSettings.apply {
