@@ -13,7 +13,7 @@
         tools:context=".ui.PlacesFragment">
 
         <ImageView
-            android:id="@+id/dialogIcon"
+            android:id="@+id/placeIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/icon"
@@ -29,9 +29,9 @@
             android:textColor="@color/light_blue_600"
             android:textSize="@dimen/big_title_text"
             app:layout_constraintBottom_toTopOf="@id/placeDescription"
-            app:layout_constraintEnd_toStartOf="@id/clearButton"
-            app:layout_constraintStart_toEndOf="@id/dialogIcon"
-            app:layout_constraintTop_toTopOf="@id/dialogIcon"
+            app:layout_constraintEnd_toStartOf="@id/deleteButton"
+            app:layout_constraintStart_toEndOf="@id/placeIcon"
+            app:layout_constraintTop_toTopOf="@id/placeIcon"
             tools:text="Название метки" />
 
         <TextView
@@ -41,14 +41,14 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textSize="@dimen/regular_text"
-            app:layout_constraintEnd_toStartOf="@id/clearButton"
-            app:layout_constraintStart_toEndOf="@id/dialogIcon"
+            app:layout_constraintEnd_toStartOf="@id/deleteButton"
+            app:layout_constraintStart_toEndOf="@id/placeIcon"
             app:layout_constraintTop_toBottomOf="@id/placeTitle"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Подробное описание метки" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/clearButton"
+            android:id="@+id/deleteButton"
             style="@style/Theme.MyMap.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
