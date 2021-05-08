@@ -19,14 +19,6 @@ class PlaceRepositoryIml(private val dao: PlaceDao) : PlaceRepository {
         }
     }
 
-    override suspend fun getPlace(idPlace: Int): Place {
-        try {
-            return dao.getPlace(idPlace)
-        } catch (e: Exception) {
-            throw UnknownError
-        }
-    }
-
     override suspend fun savePlace(place: Place) {
         try {
             dao.savePlace(PlaceEntity.fromDto(place))

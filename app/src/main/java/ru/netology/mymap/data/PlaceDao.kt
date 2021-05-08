@@ -15,9 +15,6 @@ interface PlaceDao {
     @Query("DELETE FROM PlaceEntity WHERE idPlace = :idPlace")
     suspend fun deletePlace(idPlace: Int)
 
-    @Query("SELECT * FROM PlaceEntity WHERE idPlace = :idPlace")
-    suspend fun getPlace(idPlace: Int): Place
-
     @Query("UPDATE PlaceEntity SET titlePlace = :titlePlace, descriptionPlace = :descriptionPlace WHERE idPlace = :idPlace")
     suspend fun updatePlace(idPlace: Int, titlePlace: String, descriptionPlace: String?)
 
