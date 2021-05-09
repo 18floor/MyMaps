@@ -23,4 +23,14 @@
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
+
+    <style name="Theme.MyMap.PlaceButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingStart">@dimen/place_button_padding</item>
+        <item name="android:paddingEnd">@dimen/place_button_padding</item>
+        <item name="android:minWidth">@dimen/place_button_min_size</item>
+        <item name="android:minHeight">@dimen/place_button_min_size</item>
+    </style>
 </resources>

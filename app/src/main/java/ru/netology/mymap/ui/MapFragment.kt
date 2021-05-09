@@ -22,10 +22,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.collections.MarkerManager
+import com.google.maps.android.ktx.awaitAnimateCamera
 import com.google.maps.android.ktx.awaitMap
+import com.google.maps.android.ktx.model.cameraPosition
 import com.google.maps.android.ktx.utils.collection.addMarker
 import ru.netology.mymap.R
 import ru.netology.mymap.databinding.FragmentMapBinding
+import ru.netology.mymap.utils.StringArg
 import ru.netology.mymap.viewmodel.PlaceViewModel
 
 class MapFragment : Fragment() {
@@ -33,6 +36,10 @@ class MapFragment : Fragment() {
     private val placeViewModel: PlaceViewModel by viewModels(
         ownerProducer = ::requireParentFragment
     )
+
+    companion object {
+        var Bundle.textArg: String? by StringArg
+    }
 
     private lateinit var googleMap: GoogleMap
 
@@ -146,11 +153,37 @@ class MapFragment : Fragment() {
                     val bounds = boundsBuilder.build()
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
                 }
+
+                collection.setOnInfoWindowClickListener {
+                    googleMap.moveCamera(
+                        CameraUpdateFactory.newCameraPosition(
+                            cameraPosition {
+                                target(it.position)
+                                zoom(10F)
+                            }
+                        ))
+                }
             })
 
             googleMap.setOnMapLongClickListener { point ->
                 AddPlaceDialog(point.latitude, point.longitude)
                     .show(childFragmentManager, AddPlaceDialog.TAG)
+            }
+
+            val coordinatesString = arguments?.textArg?.split(",")?.toTypedArray()
+
+            val coordinates = coordinatesString?.get(0)?.let {
+                LatLng(it.toDouble(), coordinatesString[1].toDouble())
+            }
+
+            if (coordinates != null) {
+                googleMap.awaitAnimateCamera(
+                    CameraUpdateFactory.newCameraPosition(
+                        cameraPosition {
+                            target(coordinates)
+                            zoom(10F)
+                        }
+                    ))
             }
         }
     }

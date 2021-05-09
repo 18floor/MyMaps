@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import ru.netology.mymap.R
 import ru.netology.mymap.adapter.OnInteractionListener
 import ru.netology.mymap.adapter.PlaceAdapter
 import ru.netology.mymap.data.Place
 import ru.netology.mymap.databinding.FragmentPlacesBinding
+import ru.netology.mymap.ui.MapFragment.Companion.textArg
 import ru.netology.mymap.viewmodel.PlaceViewModel
 
 class PlacesFragment : Fragment() {
@@ -44,9 +47,13 @@ class PlacesFragment : Fragment() {
             }
 
             override fun onMapView(place: Place) {
-                super.onMapView(place)
+                val coordinates = "${place.lat},${place.lon}"
+                findNavController().navigate(
+                    R.id.action_navigation_places_to_navigation_map,
+                    Bundle().apply {
+                        textArg = coordinates
+                    })
             }
-
         })
 
         binding.listPlace.adapter = adapter
