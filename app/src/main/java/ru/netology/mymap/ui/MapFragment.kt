@@ -104,11 +104,7 @@ class MapFragment : Fragment() {
                     }
                 }
                 shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                    Snackbar.make(
-                        binding.root,
-                        "Тут текст - обоснование",
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    //TODO
                 }
                 else -> {
                     requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -159,7 +155,7 @@ class MapFragment : Fragment() {
                         CameraUpdateFactory.newCameraPosition(
                             cameraPosition {
                                 target(it.position)
-                                zoom(10F)
+                                zoom(15F)
                             }
                         ))
                 }
@@ -181,7 +177,7 @@ class MapFragment : Fragment() {
                     CameraUpdateFactory.newCameraPosition(
                         cameraPosition {
                             target(coordinates)
-                            zoom(10F)
+                            zoom(15F)
                         }
                     ))
             }
