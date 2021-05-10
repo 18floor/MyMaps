@@ -173,7 +173,7 @@ class MapFragment : Fragment() {
             }
 
             if (coordinates != null) {
-                googleMap.awaitAnimateCamera(
+                googleMap.moveCamera(
                     CameraUpdateFactory.newCameraPosition(
                         cameraPosition {
                             target(coordinates)

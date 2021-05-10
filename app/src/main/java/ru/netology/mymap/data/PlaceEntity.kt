@@ -35,4 +35,3 @@ data class PlaceEntity(
 }
 
 fun List<PlaceEntity>.toDto(): List<Place> = map(PlaceEntity::toDto)
-fun List<Place>.toEntity(): List<PlaceEntity> = map(PlaceEntity::fromDto)
